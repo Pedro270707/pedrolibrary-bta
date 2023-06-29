@@ -1,0 +1,15 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "net.pedroricardo.pedrolibrary.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "OnBlockDestroyedByPlayerMixin",
+        "OnBlockDestroyedByPlayerMixin$PlayerControllerAccessors"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+  }
+}

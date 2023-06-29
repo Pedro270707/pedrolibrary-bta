@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "pedrolibrary",
+  "version": "${version}",
+
+  "name": "PedroLibrary",
+  "description": "A library mod by Pedro",
+  "authors": [
+    "Pedro Ricardo"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "CC0-1.0",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.pedroricardo.pedrolibrary.PedroLibrary"
+    ]
+  },
+  "mixins": [
+    "pedrolibrary.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3"
+  },
+  "suggests": {
+  }
+}
