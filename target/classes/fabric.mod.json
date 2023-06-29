@@ -25,14 +25,6 @@
     "pedrolibrary.mixins.json"
   ],
 
-
-  "custom": {
-    "loom:injected_interfaces": {
-      "net/minecraft/src/BlockTNT": ["net/pedroricardo/pedrolibrary/interfaces/IOnBlockDestroyedByPlayer"],
-      "net/minecraft/src/ItemSign": ["net/pedroricardo/pedrolibrary/interfaces/IBlockEntityRenderer"]
-    }
-  },
-
   "depends": {
     "fabricloader": ">=0.13.3"
   },

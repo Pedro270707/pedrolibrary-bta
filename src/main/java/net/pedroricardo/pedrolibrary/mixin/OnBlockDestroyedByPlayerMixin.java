@@ -2,7 +2,7 @@ package net.pedroricardo.pedrolibrary.mixin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.pedroricardo.pedrolibrary.IOnBlockDestroyedByPlayer;
+import net.pedroricardo.pedrolibrary.interfaces.IOnBlockDestroyedByPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -31,7 +31,7 @@ public class OnBlockDestroyedByPlayerMixin {
             int meta = world.getBlockMetadata(x, y, z);
             boolean removed = world.setBlockWithNotify(x, y, z, 0);
             if (removed) {
-                ((IOnBlockDestroyedByPlayer)block).onBlockDestroyedByPlayerBetter(((PlayerControllerAccessors)((PlayerController)(Object)this)).mc().thePlayer, world, x, y, z, meta);
+                ((IOnBlockDestroyedByPlayer)block).onBlockDestroyedByPlayer(((PlayerControllerAccessors)((PlayerController)(Object)this)).mc().thePlayer, world, x, y, z, meta);
             }
             cir.setReturnValue(removed);
         }

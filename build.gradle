@@ -47,6 +47,14 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
+	ivy {
+		url = "https://github.com/Pedro270707"
+		patternLayout {
+			artifact "[organisation]/releases/download/release/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
 }
 
 dependencies {
@@ -59,6 +67,8 @@ dependencies {
 	// Helper library
 	// If you do not need Halplibe you can comment this line out or delete this line
 	modImplementation "bta-halplibe:halplibe:${project.halplibe_version}"
+
+	modImplementation "headed-bta:headed:1.1.0"
 
 	modImplementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	modImplementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"
