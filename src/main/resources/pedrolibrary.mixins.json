@@ -4,6 +4,7 @@
     "package": "net.pedroricardo.pedrolibrary.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+        "DownloadedTextureMapAccessor",
         "ItemInBipedMixin",
         "ItemInBipedMixin$RenderAccessor",
         "ItemInBipedMixin$RenderBipedAccessor",
