@@ -4,8 +4,6 @@
     "package": "net.pedroricardo.pedrolibrary.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
-        "DropTNTInSurvivalOnlyMixin",
-        "HeadedBlockEntityRendererMixin",
         "ItemInBipedMixin",
         "ItemInBipedMixin$RenderAccessor",
         "ItemInBipedMixin$RenderBipedAccessor",
@@ -13,6 +11,8 @@
         "ItemIntoGUIMixin",
         "ItemRendererModelMixin",
         "ItemRendererModelMixin$ItemToRenderAccessor",
+        "OnBlockDestroyedByExplosionMixin",
+        "OnBlockDestroyedByExplosionMixin$ExplosionAccessor",
         "OnBlockDestroyedByPlayerMixin",
         "OnBlockDestroyedByPlayerMixin$PlayerControllerAccessors"
     ],
