@@ -66,11 +66,6 @@ public class ItemIntoGUIMixin {
 
     @Inject(method = "renderItemIntoGUI(Lnet/minecraft/src/FontRenderer;Lnet/minecraft/src/RenderEngine;Lnet/minecraft/src/ItemStack;IIF)V", at = @At("HEAD"))
     public void renderItemIntoGUI(FontRenderer fontRenderer, RenderEngine renderEngine, ItemStack itemStack, int i, int j, float alpha, CallbackInfo ci) {
-        Throwable throwable = new Throwable();
-        StackTraceElement[] stackTrace = throwable.getStackTrace();
-        for (StackTraceElement element : stackTrace) {
-            PedroLibrary.LOGGER.info(element.toString());
-        }
         if (itemStack != null && itemStack.getItem() instanceof IBlockEntityRenderer) {
             this.itemStackToRender = itemStack;
         }
