@@ -32,7 +32,7 @@ public class ItemRendererModelMixin {
         }
     }
 
-    @Inject(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "org/lwjgl/opengl/GL11.glPushMatrix", ordinal = 0, shift = At.Shift.AFTER), cancellable = true)
+    @Inject(method = "renderItemInFirstPerson", at = @At(value = "INVOKE", target = "org/lwjgl/opengl/GL11.glPushMatrix", ordinal = 0, shift = At.Shift.AFTER))
     public void renderItemInFirstPerson(float f, CallbackInfo ci) {
         ItemStack itemStack = ((ItemToRenderAccessor)((ItemRenderer)(Object)this)).itemToRender();
         if (itemStack != null && itemStack.getItem() instanceof IBlockEntityRenderer) {
