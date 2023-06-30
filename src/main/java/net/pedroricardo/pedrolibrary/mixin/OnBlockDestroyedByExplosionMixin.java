@@ -23,7 +23,7 @@ public class OnBlockDestroyedByExplosionMixin {
         World worldObj();
     }
 
-    @Inject(method = "doExplosionB", at = @At(value = "INVOKE", target = "net/minecraft/src/Block.onBlockDestroyedByExplosion"), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "doExplosionB", at = @At(value = "INVOKE", target = "Lnet/minecraft/src/Block;onBlockDestroyedByExplosion(Lnet/minecraft/src/World;III)V"), locals = LocalCapture.CAPTURE_FAILHARD)
     public void doExplosionB(boolean particles, CallbackInfo ci, List<ChunkPosition> list, int i, ChunkPosition chunkposition, int j, int k, int l, int id) {
         Explosion thisObj = ((Explosion)(Object)this);
         if (Block.blocksList[id] instanceof IOnBlockDestroyedByExplosion) {
@@ -34,7 +34,7 @@ public class OnBlockDestroyedByExplosionMixin {
         }
     }
 
-    @Redirect(method = "doExplosionB", at = @At(value = "INVOKE", target = "net/minecraft/src/Block.onBlockDestroyedByExplosion"))
+    @Redirect(method = "doExplosionB", at = @At(value = "INVOKE", target = "net/minecraft/src/Block.onBlockDestroyedByExplosion(Lnet/minecraft/src/World;III)V"))
     public void doExplosionB(Block block, World world, int j, int k, int l) {
     }
 }

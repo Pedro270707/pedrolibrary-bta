@@ -25,7 +25,9 @@ public class ItemIntoGUIMixin {
                 if (this.itemStackToRender != null) {
                     renderEngine.bindTexture(item.getTextureToRender(this.itemStackToRender));
                 } else {
-                    renderEngine.bindTexture(item.getTextureToRender(new ItemStack(Item.itemsList[itemID])));
+                    ItemStack itemStack = new ItemStack(Item.itemsList[itemID]);
+                    itemStack.setMetadata(j);
+                    renderEngine.bindTexture(item.getTextureToRender(itemStack));
                 }
                 GL11.glPushMatrix();
                 GL11.glTranslatef((float)(l - 2), (float)(i1 + 3), -3.0F);
@@ -47,7 +49,14 @@ public class ItemIntoGUIMixin {
 
                 GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
                 item.applyGuiModelTransformations();
-                item.render(new ItemStack(Item.itemsList[itemID]), 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+                ItemStack itemStackToRender;
+                if (this.itemStackToRender != null) {
+                    itemStackToRender = this.itemStackToRender;
+                } else {
+                    itemStackToRender = new ItemStack(Item.itemsList[itemID]);
+                    itemStackToRender.setMetadata(j);
+                }
+                item.render(itemStackToRender, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
                 GL11.glPopMatrix();
                 GL11.glDisable(3042);
                 ci.cancel();
@@ -57,6 +66,11 @@ public class ItemIntoGUIMixin {
 
     @Inject(method = "renderItemIntoGUI(Lnet/minecraft/src/FontRenderer;Lnet/minecraft/src/RenderEngine;Lnet/minecraft/src/ItemStack;IIF)V", at = @At("HEAD"))
     public void renderItemIntoGUI(FontRenderer fontRenderer, RenderEngine renderEngine, ItemStack itemStack, int i, int j, float alpha, CallbackInfo ci) {
+        Throwable throwable = new Throwable();
+        StackTraceElement[] stackTrace = throwable.getStackTrace();
+        for (StackTraceElement element : stackTrace) {
+            PedroLibrary.LOGGER.info(element.toString());
+        }
         if (itemStack != null && itemStack.getItem() instanceof IBlockEntityRenderer) {
             this.itemStackToRender = itemStack;
         }
