@@ -8,7 +8,7 @@ repositories {
     ivy {
         url = "https://github.com/Pedro270707"
         patternLayout {
-            artifact "[organisation]/releases/download/release/[module]-[revision].jar"
+            artifact "[organisation]/releases/download/v[revision]/[module]-[revision].jar"
             m2compatible = true
         }
         metadataSources { artifact() }
