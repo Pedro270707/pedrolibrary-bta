@@ -12,7 +12,7 @@ public class TestBlock extends Block implements IOnBlockDestroyedByPlayer, IOnBl
     }
 
     @Override
-    public void onBlockDestroyedByPlayer(EntityPlayer player, World world, int x, int y, int z, int metadata) {
+    public void onBlockDestroyedByPlayer(EntityPlayer player, World world, TileEntity blockEntity, int x, int y, int z, int metadata) {
         if (player.getGamemode().dropBlockOnBreak) {
             world.dropItem(x, y, z, new ItemStack(Item.diamond));
         }

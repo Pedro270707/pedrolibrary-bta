@@ -10,7 +10,7 @@
         "ItemInPlayerMixin",
         "ItemIntoGUIMixin",
         "ItemRendererModelMixin",
-        "ItemRendererModelMixin$ItemToRenderAccessor",
+        "ItemRendererModelMixin$ItemRendererAccessor",
         "OnBlockDestroyedByExplosionMixin",
         "OnBlockDestroyedByExplosionMixin$ExplosionAccessor",
         "OnBlockDestroyedByPlayerMixin",

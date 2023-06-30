@@ -25,13 +25,14 @@ public class OnBlockDestroyedByPlayerMixin {
     public void destroyBlock(int x, int y, int z, int side, CallbackInfoReturnable<Boolean> cir) {
         World world = ((PlayerControllerAccessors)((PlayerController)(Object)this)).mc().theWorld;
         Block block = Block.getBlock(world.getBlockId(x, y, z));
+        TileEntity blockEntity = world.getBlockTileEntity(x, y, z);
         if (block instanceof IOnBlockDestroyedByPlayer) {
             ((PlayerControllerAccessors)((PlayerController)(Object)this)).invokeSetMineBlock((Integer)null, (Integer)null, (Integer)null);
             world.playSoundEffect(2001, x, y, z, block.blockID);
             int meta = world.getBlockMetadata(x, y, z);
             boolean removed = world.setBlockWithNotify(x, y, z, 0);
             if (removed) {
-                ((IOnBlockDestroyedByPlayer)block).onBlockDestroyedByPlayer(((PlayerControllerAccessors)((PlayerController)(Object)this)).mc().thePlayer, world, x, y, z, meta);
+                ((IOnBlockDestroyedByPlayer)block).onBlockDestroyedByPlayer(((PlayerControllerAccessors)((PlayerController)(Object)this)).mc().thePlayer, world, blockEntity, x, y, z, meta);
             }
             cir.setReturnValue(removed);
         }
