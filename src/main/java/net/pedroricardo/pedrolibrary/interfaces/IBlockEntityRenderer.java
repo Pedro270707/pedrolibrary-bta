@@ -27,4 +27,7 @@ public interface IBlockEntityRenderer {
     default void applyPlayerModelTransformations() {
         this.applyBipedModelTransformations();
     }
+
+    default void applyDroppedItemTransformations() {
+    }
 }

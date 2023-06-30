@@ -1,5 +1,6 @@
 package net.pedroricardo.pedrolibrary.mixin;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.pedroricardo.pedrolibrary.PedroLibrary;
 import net.pedroricardo.pedrolibrary.interfaces.IBlockEntityRenderer;
@@ -19,7 +20,7 @@ public class ItemIntoGUIMixin {
         float f3;
         if (Item.itemsList[itemID] instanceof IBlockEntityRenderer) {
             IBlockEntityRenderer item = (IBlockEntityRenderer) Item.itemsList[itemID];
-            if (item.renderWithCustomModel()) {
+            if (item.renderWithCustomModel() && (!item.respect3DItemsOption() || Minecraft.getMinecraft().gameSettings.items3D.value)) {
                 GL11.glEnable(3042);
                 GL11.glBlendFunc(770, 771);
                 if (this.itemStackToRender != null) {

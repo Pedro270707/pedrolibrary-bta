@@ -12,14 +12,15 @@ public class TestBlock extends Block implements IOnBlockDestroyedByPlayer, IOnBl
     }
 
     @Override
-    public void onBlockDestroyedByPlayer(EntityPlayer player, World world, TileEntity blockEntity, int x, int y, int z, int metadata) {
+    public void onBlockDestroyedByPlayer(EntityPlayer player, World world, Block block, TileEntity blockEntity, int x, int y, int z, int metadata) {
         if (player.getGamemode().dropBlockOnBreak) {
             world.dropItem(x, y, z, new ItemStack(Item.diamond));
         }
     }
 
     @Override
-    public void onBlockDestroyedByExplosion(Entity exploder, World world, double explosionX, double explosionY,
+    public void onBlockDestroyedByExplosion(Entity exploder, World world, Block block, TileEntity blockEntity,
+                                            double explosionX, double explosionY,
                                             double explosionZ, float explosionSize,
                                             Set<ChunkPosition> destroyedBlockPositions, int x, int y, int z) {
         if (exploder instanceof EntityCreeper) {

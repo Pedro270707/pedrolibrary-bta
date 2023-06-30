@@ -32,7 +32,7 @@ public class OnBlockDestroyedByPlayerMixin {
             int meta = world.getBlockMetadata(x, y, z);
             boolean removed = world.setBlockWithNotify(x, y, z, 0);
             if (removed) {
-                ((IOnBlockDestroyedByPlayer)block).onBlockDestroyedByPlayer(((PlayerControllerAccessors)((PlayerController)(Object)this)).mc().thePlayer, world, blockEntity, x, y, z, meta);
+                ((IOnBlockDestroyedByPlayer)block).onBlockDestroyedByPlayer(((PlayerControllerAccessors)((PlayerController)(Object)this)).mc().thePlayer, world, block, blockEntity, x, y, z, meta);
             }
             cir.setReturnValue(removed);
         }
