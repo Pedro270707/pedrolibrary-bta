@@ -1,4 +1,4 @@
-package net.pedroricardo.pedrolibrary;
+package net.pedroricardo.pedrolibrary.interfaces;
 
 import net.minecraft.src.DownloadedTexture;
 import net.minecraft.src.ImageParser;

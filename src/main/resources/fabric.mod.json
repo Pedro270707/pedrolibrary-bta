@@ -25,6 +25,12 @@
     "pedrolibrary.mixins.json"
   ],
 
+  "custom": {
+    "loom:injected_interfaces": {
+      "net/minecraft/src/RenderEngine": ["net/pedroricardo/pedrolibrary/interfaces/DownloadableTextureHelper"]
+    }
+  },
+
   "depends": {
     "fabricloader": ">=0.13.3"
   },
