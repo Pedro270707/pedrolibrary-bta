@@ -1,13 +1,13 @@
-package net.pedroricardo.pedrolibrary.interfaces;
+package net.pedroricardo.pedrolibrary;
 
 import net.minecraft.src.DownloadedTexture;
 import net.minecraft.src.ImageParser;
 import net.minecraft.src.RenderEngine;
 import net.pedroricardo.pedrolibrary.mixin.DownloadedTextureMapAccessor;
 
-public interface DownloadableTextureHelper {
+public class DownloadableTextureHelper {
 
-    default int getDownloadableTexture(String url, String localTexture, ImageParser imageParser) {
+    public int getDownloadableTexture(String url, String localTexture, ImageParser imageParser) {
         if (url == null) {
             if (localTexture != null) {
                 return ((RenderEngine)(Object)this).getTexture(localTexture);
