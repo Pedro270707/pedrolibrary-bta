@@ -20,7 +20,7 @@ You can then implement the mod in the `dependencies` in your `build.gradle` file
 
 ```groovy
 dependencies {
-    modImplementation "pedrolibrary-bta:pedrolibrary:1.0.3.2"
+    modImplementation "pedrolibrary-bta:pedrolibrary:1.0.4"
 }
 ```
 
