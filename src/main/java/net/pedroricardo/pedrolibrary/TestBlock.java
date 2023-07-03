@@ -2,6 +2,7 @@ package net.pedroricardo.pedrolibrary;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+import net.pedroricardo.pedrolibrary.interfaces.ICustomDescription;
 import net.pedroricardo.pedrolibrary.interfaces.IOnBlockDestroyedByExplosion;
 import net.pedroricardo.pedrolibrary.interfaces.IOnBlockDestroyedByPlayer;
 

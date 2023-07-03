@@ -2,8 +2,7 @@ package net.pedroricardo.pedrolibrary.mixin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.pedroricardo.pedrolibrary.PedroLibrary;
-import net.pedroricardo.pedrolibrary.interfaces.IBlockEntityRenderer;
+import net.pedroricardo.pedrolibrary.interfaces.IItemWithModelRenderer;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,17 +17,17 @@ public class ItemIntoGUIMixin {
     public void drawItemIntoGui(FontRenderer fontRenderer, RenderEngine renderEngine, int itemID, int j, int k, int l, int i1, float brightness, float alpha, CallbackInfo ci) {
         float f1;
         float f3;
-        if (Item.itemsList[itemID] instanceof IBlockEntityRenderer) {
-            IBlockEntityRenderer item = (IBlockEntityRenderer) Item.itemsList[itemID];
-            if (item.renderWithCustomModel() && (!item.respect3DItemsOption() || Minecraft.getMinecraft().gameSettings.items3D.value)) {
+        if (Item.itemsList[itemID] instanceof IItemWithModelRenderer) {
+            IItemWithModelRenderer item = (IItemWithModelRenderer) Item.itemsList[itemID];
+            if (item.getRenderer().renderWithCustomModel() && (!item.getRenderer().respect3DItemsOption() || Minecraft.getMinecraft().gameSettings.items3D.value)) {
                 GL11.glEnable(3042);
                 GL11.glBlendFunc(770, 771);
                 if (this.itemStackToRender != null) {
-                    renderEngine.bindTexture(item.getTextureToRender(this.itemStackToRender));
+                    renderEngine.bindTexture(item.getRenderer().getTextureToRender(this.itemStackToRender));
                 } else {
                     ItemStack itemStack = new ItemStack(Item.itemsList[itemID]);
                     itemStack.setMetadata(j);
-                    renderEngine.bindTexture(item.getTextureToRender(itemStack));
+                    renderEngine.bindTexture(item.getRenderer().getTextureToRender(itemStack));
                 }
                 GL11.glPushMatrix();
                 GL11.glTranslatef((float)(l - 2), (float)(i1 + 3), -3.0F);
@@ -49,7 +48,7 @@ public class ItemIntoGUIMixin {
                 }
 
                 GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
-                item.applyGuiModelTransformations();
+                item.getRenderer().applyGuiModelTransformations();
                 ItemStack itemStackToRender;
                 if (this.itemStackToRender != null) {
                     itemStackToRender = this.itemStackToRender;
@@ -57,7 +56,7 @@ public class ItemIntoGUIMixin {
                     itemStackToRender = new ItemStack(Item.itemsList[itemID]);
                     itemStackToRender.setMetadata(j);
                 }
-                item.render(itemStackToRender, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+                item.getRenderer().render(itemStackToRender, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
                 GL11.glPopMatrix();
                 GL11.glDisable(3042);
                 ci.cancel();
@@ -67,14 +66,14 @@ public class ItemIntoGUIMixin {
 
     @Inject(method = "renderItemIntoGUI(Lnet/minecraft/src/FontRenderer;Lnet/minecraft/src/RenderEngine;Lnet/minecraft/src/ItemStack;IIF)V", at = @At("HEAD"))
     public void renderItemIntoGUI(FontRenderer fontRenderer, RenderEngine renderEngine, ItemStack itemStack, int i, int j, float alpha, CallbackInfo ci) {
-        if (itemStack != null && itemStack.getItem() instanceof IBlockEntityRenderer) {
+        if (itemStack != null && itemStack.getItem() instanceof IItemWithModelRenderer) {
             this.itemStackToRender = itemStack;
         }
     }
 
     @Inject(method = "renderItemIntoGUI(Lnet/minecraft/src/FontRenderer;Lnet/minecraft/src/RenderEngine;Lnet/minecraft/src/ItemStack;IIFF)V", at = @At("HEAD"))
     public void renderItemIntoGUI(FontRenderer fontRenderer, RenderEngine renderEngine, ItemStack itemStack, int i, int j, float brightness, float alpha, CallbackInfo ci) {
-        if (itemStack != null && itemStack.getItem() instanceof IBlockEntityRenderer) {
+        if (itemStack != null && itemStack.getItem() instanceof IItemWithModelRenderer) {
             this.itemStackToRender = itemStack;
         }
     }

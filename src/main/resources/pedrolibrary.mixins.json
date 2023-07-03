@@ -1,26 +1,26 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "net.pedroricardo.pedrolibrary.mixin",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-        "DownloadedTextureMapAccessor",
-        "ItemDroppedMixin",
-        "ItemInBipedMixin",
-        "ItemInBipedMixin$RenderAccessor",
-        "ItemInBipedMixin$RenderBipedAccessor",
-        "ItemInPlayerMixin",
-        "ItemIntoGUIMixin",
-        "ItemRendererModelMixin",
-        "ItemRendererModelMixin$ItemRendererAccessor",
-        "OnBlockDestroyedByExplosionMixin",
-        "OnBlockDestroyedByExplosionMixin$ExplosionAccessor",
-        "OnBlockDestroyedByPlayerMixin",
-        "OnBlockDestroyedByPlayerMixin$PlayerControllerAccessors"
-    ],
-    "client": [
-    ],
-    "injectors": {
-        "defaultRequire": 1
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.pedroricardo.pedrolibrary.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "CustomDescriptionMixin",
+    "CustomDescriptionMixin$MinecraftAccessor",
+    "DownloadedTextureMapAccessor",
+    "ItemDroppedMixin",
+    "ItemInBipedMixin",
+    "ItemInPlayerMixin",
+    "ItemIntoGUIMixin",
+    "ItemRendererModelMixin",
+    "ItemRendererModelMixin$ItemRendererAccessor",
+    "OnBlockDestroyedByExplosionMixin",
+    "OnBlockDestroyedByExplosionMixin$ExplosionAccessor",
+    "OnBlockDestroyedByPlayerMixin",
+    "OnBlockDestroyedByPlayerMixin$PlayerControllerAccessors"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
   }
 }
