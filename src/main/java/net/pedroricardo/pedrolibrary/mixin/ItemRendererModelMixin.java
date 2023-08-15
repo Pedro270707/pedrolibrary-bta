@@ -52,6 +52,7 @@ public class ItemRendererModelMixin {
         if (itemStack != null && itemStack.getItem() instanceof IItemWithModelRenderer) {
             if (((IItemWithModelRenderer)itemStack.getItem()).getRenderer().renderWithCustomModel() && (!((IItemWithModelRenderer)itemStack.getItem()).getRenderer().respect3DItemsOption() || Minecraft.getMinecraft().gameSettings.items3D.value)) {
                 GL11.glPushMatrix();
+                RenderHelper.enableStandardItemLighting();
                 float f9 = entityplayersp.getSwingProgress(f);
                 float f13 = MathHelper.sin(f9 * 3.141593f);
                 float f17 = MathHelper.sin(MathHelper.sqrt_float(f9) * 3.141593f);
@@ -81,6 +82,8 @@ public class ItemRendererModelMixin {
                 item.getRenderer().applyFirstPersonModelTransformations();
                 item.getRenderer().render(itemStack, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
                 GL11.glPopMatrix();
+                GL11.glDisable(32826);
+                RenderHelper.disableStandardItemLighting();
                 ci.cancel();
             }
         }
