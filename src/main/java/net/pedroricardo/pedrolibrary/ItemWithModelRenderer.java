@@ -1,6 +1,7 @@
 package net.pedroricardo.pedrolibrary;
 
-import net.minecraft.src.ItemStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.item.ItemStack;
 
 public abstract class ItemWithModelRenderer {
     public boolean renderWithCustomModel() {
@@ -11,7 +12,7 @@ public abstract class ItemWithModelRenderer {
         return false;
     }
 
-    public abstract int getTextureToRender(ItemStack itemStack);
+    public abstract int getTextureToRender(Minecraft mc, ItemStack itemStack);
 
     public abstract void render(ItemStack itemStack, float x, float y, float z, float scaleX, float scaleY, float scaleZ);
 

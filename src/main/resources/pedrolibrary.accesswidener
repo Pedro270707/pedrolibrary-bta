@@ -1,0 +1,2 @@
+accessWidener   v1 named
+accessible method net/minecraft/client/gui/GuiTooltip formatDescription (Ljava/lang/String;I)Ljava/lang/String;

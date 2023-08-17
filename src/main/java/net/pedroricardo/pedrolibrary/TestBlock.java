@@ -1,20 +1,27 @@
 package net.pedroricardo.pedrolibrary;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
-import net.pedroricardo.pedrolibrary.interfaces.ICustomDescription;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.block.material.Material;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.monster.EntityCreeper;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.ChunkPosition;
 import net.pedroricardo.pedrolibrary.interfaces.IOnBlockDestroyedByExplosion;
 import net.pedroricardo.pedrolibrary.interfaces.IOnBlockDestroyedByPlayer;
 
 import java.util.Set;
 
 public class TestBlock extends Block implements IOnBlockDestroyedByPlayer, IOnBlockDestroyedByExplosion {
-    public TestBlock(int i, Material material) {
-        super(i, material);
+    public TestBlock(String stringID, int i, Material material) {
+        super(stringID, i, material);
     }
 
     @Override
-    public void onBlockDestroyedByPlayer(EntityPlayer player, World world, Block block, TileEntity blockEntity, int x, int y, int z, int metadata) {
+    public void onBlockDestroyedByPlayer(World world, Block block, int x, int y, int z, int metadata, TileEntity blockEntity, EntityPlayer player, Item item) {
         if (player.getGamemode().dropBlockOnBreak) {
             world.dropItem(x, y, z, new ItemStack(Item.diamond));
         }

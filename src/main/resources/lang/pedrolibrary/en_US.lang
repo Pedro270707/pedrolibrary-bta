@@ -1,2 +1,4 @@
-tile.pedrolibrary.testBlock.name=Test Block
-tile.pedrolibrary.testBlock.desc=A block used for testing. If you installed the library and see this in-game, warn me about it!
+tile.pedrolibrary.test_block.name=Test Block
+tile.pedrolibrary.test_block.desc=A block used for testing. If you installed the library and see this in-game, warn me about it!
+tile.pedrolibrary.test_block.desc1=Description 1
+tile.pedrolibrary.test_block.desc2=Description 2

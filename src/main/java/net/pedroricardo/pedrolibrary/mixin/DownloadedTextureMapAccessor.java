@@ -1,7 +1,7 @@
 package net.pedroricardo.pedrolibrary.mixin;
 
-import net.minecraft.src.DownloadedTexture;
-import net.minecraft.src.RenderEngine;
+import net.minecraft.client.render.DownloadedTexture;
+import net.minecraft.client.render.RenderEngine;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 

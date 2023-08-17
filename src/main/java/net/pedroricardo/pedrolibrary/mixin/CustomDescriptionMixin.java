@@ -1,44 +1,42 @@
 package net.pedroricardo.pedrolibrary.mixin;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
-import net.pedroricardo.pedrolibrary.interfaces.ICustomDescription;
+import net.minecraft.client.gui.GuiTooltip;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
+import net.minecraft.core.player.inventory.slot.Slot;
+import net.pedroricardo.pedrolibrary.registry.ItemDescriptionHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import static net.minecraft.src.GuiContainer.formatDescription;
-
-@Mixin(value = GuiContainer.class, remap = false)
+@Mixin(value = GuiTooltip.class, remap = false)
 public class CustomDescriptionMixin {
-    @Mixin(value = GuiScreen.class, remap = false)
+    @Mixin(value = GuiTooltip.class, remap = false)
     private interface MinecraftAccessor {
         @Accessor("mc")
         Minecraft mc();
     }
 
-    @Inject(method = "drawScreen", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;append(C)Ljava/lang/StringBuilder;", ordinal = 2, shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
-    public void drawScreen(int x, int y, float renderPartialTicks, CallbackInfo ci, int centerX, int centerY, Slot slot,
-                           InventoryPlayer inventoryplayer, StringTranslate trans, StringBuilder text,
-                           boolean multiLine, boolean control, boolean shift, boolean showDescription,
-                           boolean isCrafting, String itemName, String itemNick, boolean debug) {
-        if (slot.getStack().getItem() instanceof ICustomDescription) {
-            text.append("\n").append(formatDescription(((ICustomDescription) slot.getStack().getItem()).getDescription(((MinecraftAccessor)((GuiContainer)(Object)this)).mc().thePlayer, slot), 16));
+    @Inject(method = "getTooltipText(Lnet/minecraft/core/item/ItemStack;ZLnet/minecraft/core/player/inventory/slot/Slot;)Ljava/lang/String;", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;append(C)Ljava/lang/StringBuilder;", ordinal = 2, shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
+    public void getTooltipText(ItemStack itemStack, boolean showDescription, Slot slot, CallbackInfoReturnable<String> cir, I18n trans, StringBuilder text) {
+        if (ItemDescriptionHelper.getItems().containsKey(slot.getStack().getItem())) {
+            text.append('\n').append(GuiTooltip.formatDescription(ItemDescriptionHelper.getItems().get(slot.getStack().getItem()).getDescription(((MinecraftAccessor)((GuiTooltip)(Object)this)).mc().thePlayer, itemStack, slot, trans), 16));
         } else {
-            text.append('\n').append(formatDescription(trans.translateKey(slot.getStack().getItemName() + ".desc"), 16));
+            text.append('\n').append(GuiTooltip.formatDescription(trans.translateKey(slot.getStack().getItemName() + ".desc"), 16));
         }
     }
 
-    @Redirect(method = "drawScreen", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;append(C)Ljava/lang/StringBuilder;", ordinal = 2))
+    @Redirect(method = "getTooltipText(Lnet/minecraft/core/item/ItemStack;ZLnet/minecraft/core/player/inventory/slot/Slot;)Ljava/lang/String;", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;append(C)Ljava/lang/StringBuilder;", ordinal = 2))
     public StringBuilder append1(StringBuilder stringBuilder, char c) {
         return new StringBuilder("");
     }
 
-    @Redirect(method = "drawScreen", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;append(Ljava/lang/String;)Ljava/lang/StringBuilder;", ordinal = 4))
+    @Redirect(method = "getTooltipText(Lnet/minecraft/core/item/ItemStack;ZLnet/minecraft/core/player/inventory/slot/Slot;)Ljava/lang/String;", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;append(Ljava/lang/String;)Ljava/lang/StringBuilder;", ordinal = 5))
     public StringBuilder append2(StringBuilder stringBuilder, String str) {
         return new StringBuilder("");
     }

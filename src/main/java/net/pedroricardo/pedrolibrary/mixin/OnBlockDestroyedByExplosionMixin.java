@@ -1,6 +1,10 @@
 package net.pedroricardo.pedrolibrary.mixin;
 
-import net.minecraft.src.*;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.world.Explosion;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.ChunkPosition;
 import net.pedroricardo.pedrolibrary.interfaces.IOnBlockDestroyedByExplosion;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,7 +27,7 @@ public class OnBlockDestroyedByExplosionMixin {
         World worldObj();
     }
 
-    @Inject(method = "doExplosionB", at = @At(value = "INVOKE", target = "Lnet/minecraft/src/Block;onBlockDestroyedByExplosion(Lnet/minecraft/src/World;III)V"), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "doExplosionB", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/block/Block;onBlockDestroyedByExplosion(Lnet/minecraft/core/world/World;III)V"), locals = LocalCapture.CAPTURE_FAILHARD)
     public void doExplosionB(boolean particles, CallbackInfo ci, List<ChunkPosition> list, int i, ChunkPosition chunkposition, int j, int k, int l, int id) {
         Explosion thisObj = ((Explosion)(Object)this);
         TileEntity blockEntity = worldObj.getBlockTileEntity(j, k, l);
@@ -36,10 +40,10 @@ public class OnBlockDestroyedByExplosionMixin {
         }
     }
 
-    @Redirect(method = "doExplosionB", at = @At(value = "INVOKE", target = "net/minecraft/src/Block.onBlockDestroyedByExplosion(Lnet/minecraft/src/World;III)V"))
+    @Redirect(method = "doExplosionB", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/block/Block;onBlockDestroyedByExplosion(Lnet/minecraft/core/world/World;III)V"))
     public void doExplosionB(Block block, World world, int j, int k, int l) {
     }
-    @Redirect(method = "doExplosionB", at = @At(value = "INVOKE", target = "Lnet/minecraft/src/World;setBlockWithNotify(IIII)Z"))
+    @Redirect(method = "doExplosionB", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;setBlockWithNotify(IIII)Z"))
     public boolean doExplosionB(World world, int x, int y, int z, int id) {
         return false;
     }
